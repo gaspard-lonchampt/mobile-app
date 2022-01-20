@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+proxy-express
 
 # macOS
 .DS_Store
