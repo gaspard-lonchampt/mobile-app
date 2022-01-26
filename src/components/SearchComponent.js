@@ -29,7 +29,7 @@ export default class SearchComponent extends Component {
             .then((res) => {
                 if (res.message === 'Not Found') {
                     this.setState({
-                        error: 'User not found'
+                        error: 'Podcast not found'
                     });
                 }
                 else {
@@ -55,7 +55,7 @@ export default class SearchComponent extends Component {
         );
         return (
             <View style={styles.main}>
-                <Text style={styles.title}>Search For Github User</Text>
+                <Text style={styles.title}>Search For Podcast</Text>
                 <TextInput
                     style={styles.searchInput}
                     onChange={this.handleChange}

@@ -10,6 +10,7 @@ npm-debug.*
 *.orig.*
 web-build/
 proxy-express
+cors/
 
 # macOS
 .DS_Store

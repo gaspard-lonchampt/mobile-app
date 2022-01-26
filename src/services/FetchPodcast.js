@@ -1,4 +1,5 @@
-export const getPodcast = (type) => {
+export const getPodcast =  async (type) => {
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "TkQcw1R9NcobsN0CRTxWVw");
 
@@ -6,17 +7,20 @@ export const getPodcast = (type) => {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
-
     };
 
-    const host = 'http://localhost:3001/';
+    const host = 'https://proxy-grenouille.herokuapp.com/';
+    // const host = 'http://localhost:3001/';
     // const host = 'https://api.transistor.fm/v1/';
-    // const host = 'https://api.github.com/users/';
     let podcast = type.toLowerCase().trim();
     const URL = host.concat(podcast);
 
-    return fetch(URL, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
+    let response = await fetch(URL, requestOptions)
+        .then(response => response.json())
+        .then((responseJson) => {
+            console.log('getting data from Transistor', responseJson)
+            return responseJson
+        })
         .catch(error => console.log('error', error));
+    return response
 }

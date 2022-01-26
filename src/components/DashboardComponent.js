@@ -10,17 +10,8 @@ export default class DashboardComponent extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={{ uri: this.props.podcastInfo.avatar_url }} style={styles.image} />
+                {{podcastInfo}}
             </View>
         )
     }
 }
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 65,
-        flex: 1
-    },
-    image: {
-        height: 350
-    }
-});
