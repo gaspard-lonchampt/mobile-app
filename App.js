@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import Programs from './src/programs';
+import Category from './src/category';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,10 +9,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Button
         title="PROGRAMMES"
-        onPress={() => navigation.navigate('Programs')}
+        onPress={() => navigation.navigate('Category')}
       />
     </View>
   );
@@ -40,11 +40,12 @@ return (
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen
+       
         name="Home"
         component={HomeScreen}
         options={{ title: 'Overview' }}
       />
-      <Stack.Screen name="Programs" component={Programs} />
+      <Stack.Screen name="Category" component={Category} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -57,7 +58,7 @@ return (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#abf',
     alignItems: 'center',
     justifyContent: 'center',
   },

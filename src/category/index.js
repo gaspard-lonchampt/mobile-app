@@ -1,0 +1,77 @@
+import { StyleSheet,Image, ScrollView, ActivityIndicator,View,Text, FlatList,Button, Pressable   } from 'react-native';
+import React, { useEffect, useState } from 'react';
+
+
+
+
+const Category = () => {
+  // const [data, setData] = useState({});
+  const [loader, setLoader] = useState(false)
+  const [category, setCategory] = useState({})
+
+  const fetchCategory = async () => {
+    setLoader(true)
+     try {
+      const response = await fetch('http://localhost:8080/categories/');
+      const json = await response.json();
+      setCategory(json['hydra:member'])
+      setLoader(false)
+
+    } catch (error) {
+      console.error(error);
+      setLoader(false)
+    } 
+  }
+
+  const categoryInArray = (data) =>{
+
+    let array = []
+    for (let i =0; i < data.length; i++){
+       array.push(data[i].name)
+    }
+
+    return array.map(cat => 
+      <Pressable style={styles.button}  key={cat} title={cat} name={cat}>
+         <Text style={styles.text}>{`${cat}`}</Text>
+      </Pressable >)
+
+  }
+
+  useEffect(()=>{
+    fetchCategory()
+  },[])
+
+
+  return (
+    <View >
+      {loader ? <ActivityIndicator/> :   <> {categoryInArray(category)} </>}
+    </View>
+  )
+
+
+}
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'blue',
+    width: 150
+
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+});
+
+
+export default Category;
+
