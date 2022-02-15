@@ -18,13 +18,13 @@ function HomeScreen({ navigation }) {
   );
 }
 
-// function DetailsScreen() {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Details Screen</Text>
-//     </View>
-//   );
-// }
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
 
 
 
@@ -35,21 +35,17 @@ export default function App() {
 
 
 return (
-
-  
-    <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ title: 'Overview' }}
-      />
-      <Stack.Screen name="Programs" component={Programs} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-
-
+  <NavigationContainer>
+    <Stack.Navigator>
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{ title: 'Overview' }}
+    />
+    <Stack.Screen name="Programs" component={Programs} />
+    </Stack.Navigator>
+  </NavigationContainer>
+);
 }
 
 

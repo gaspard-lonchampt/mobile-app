@@ -12,7 +12,7 @@ const Programs = () => {
   const myFetch = async () => {
     setLoader(true)
      try {
-      const response = await fetch('http://localhost:8080/categories/');
+      const response = await fetch('http://127.0.0.1:8080/categories/');
       const json = await response.json();
   
       setCategory(json['hydra:member'])
