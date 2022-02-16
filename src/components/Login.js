@@ -72,6 +72,7 @@ const Login = () => {
           placeholder="Login"
         />
         <TextInput
+          secureTextEntry={true}
           style={styles.input}
           onChangeText={onChangePass}
           value={pass}
