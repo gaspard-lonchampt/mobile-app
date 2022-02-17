@@ -29,19 +29,25 @@ const Category = ({ navigation }) => {
   }
 
   const categoryInArray = (data) =>{
+    let arrayForMap = []
 
-    let array = []
     for (let i =0; i < data.length; i++){
-       array.push(data[i].name)
-    }
+      let idcat = data[i].id
+      let category = data[i].name
+      let objectInArrayForMap = {id:idcat,name:category}
 
-    return array.map(cat => 
-      <Pressable onPress={()=> navigation.navigate('Programs', {idCat:'2'})}
+     console.log(objectInArrayForMap)
+     arrayForMap.push(objectInArrayForMap)
+    }
+    console.log(arrayForMap)
+
+    return arrayForMap.map(category => 
+      <Pressable onPress={()=> navigation.navigate('Programs', {idCat:category.id})}
                  style={styles.button}    
-                 key={cat}
-                 title={cat} 
-                 name={'yeahhhhh'}> 
-         <Text style={styles.text}>{`${cat}`}</Text>
+                 key={category.id}
+                 title={category.id} 
+                 name={category.name}> 
+         <Text style={styles.text}>{`${category.name}`}</Text>
       </Pressable >)
 
   }
