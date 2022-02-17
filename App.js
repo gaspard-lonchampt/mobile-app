@@ -4,6 +4,7 @@ import Category from './src/category';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Programs from './src/programs';
 
 
 
@@ -40,12 +41,17 @@ return (
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen
-       
         name="Home"
         component={HomeScreen}
         options={{ title: 'Overview' }}
       />
-      <Stack.Screen name="Category" component={Category} />
+      <Stack.Screen 
+        name="Category" 
+        component={Category} />
+      <Stack.Screen 
+        name="Programs" 
+        component={Programs}
+        options={({ route }) => ({ articleId: route.params.idCat })} />
       </Stack.Navigator>
     </NavigationContainer>
   );

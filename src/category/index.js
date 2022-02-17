@@ -1,10 +1,13 @@
 import { StyleSheet,Image, ScrollView, ActivityIndicator,View,Text, FlatList,Button, Pressable   } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 
-const Category = () => {
+
+const Category = ({ navigation }) => {
   // const [data, setData] = useState({});
   const [loader, setLoader] = useState(false)
   const [category, setCategory] = useState({})
@@ -15,6 +18,8 @@ const Category = () => {
       const response = await fetch('http://localhost:8080/categories/');
       const json = await response.json();
       setCategory(json['hydra:member'])
+      console.log(json['hydra:member'])
+      console.log(json['hydra:member'][0].id)
       setLoader(false)
 
     } catch (error) {
@@ -31,7 +36,11 @@ const Category = () => {
     }
 
     return array.map(cat => 
-      <Pressable style={styles.button}  key={cat} title={cat} name={cat}>
+      <Pressable onPress={()=> navigation.navigate('Programs', {idCat:'2'})}
+                 style={styles.button}    
+                 key={cat}
+                 title={cat} 
+                 name={'yeahhhhh'}> 
          <Text style={styles.text}>{`${cat}`}</Text>
       </Pressable >)
 
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: 'blue',
-    width: 150
+  
 
   },
   text: {
