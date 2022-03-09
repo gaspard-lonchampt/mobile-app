@@ -1,16 +1,7 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    TouchableHighlight,
-    Button,
-    Pressable,
-    ActivityIndicator
-} from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from "react"
-import { ShowsView } from '../components/ShowsView';
-import { EpisodesView } from '../components/EpisodesView';
+import { PodcastEpisodes } from '../screens/PodcastEpisodes';
+import { PodcastShows } from '../screens/PodcastShows';
 
 function GetPodcast(props) {
 
@@ -25,6 +16,7 @@ function GetPodcast(props) {
 
     const host = 'https://proxy-grenouille.herokuapp.com/';
     const type = props.route.params.route;
+    // const type = 'shows';
     // console.log(type); 
     // const host = 'http://localhost:3001/';
     // const host = 'https://api.transistor.fm/v1/';
@@ -36,23 +28,9 @@ function GetPodcast(props) {
     const [loading, setLoading] = useState(true);
     var content;
 
-
-    // const Conditional_rendering_from_route = (data) => {
-    //     let type = props.route.params.route;
-    //     console.log(data);
-    //     if (type == 'shows') {
-    //         return (
-    //             <ShowsView data={data} /> 
-    //         )
-    //     } else if (type == 'episodes') {
-    //         return <EpisodesView data={data} /> 
-    //     } else {
-    //         alert("ceci n'existe pas");
-    //     }
-    // }
-
     useEffect(() => {
         fetch(URL, requestOptions)
+        // setLoading(true)
             .then(response => response.json())
             .then((responseJson) => {
                 console.log('getting data from Transistor', responseJson)
@@ -60,23 +38,18 @@ function GetPodcast(props) {
                 setLoading(false);
             })
             .catch(error => console.log('error', error));
+            // setLoading(false)
     }, [])
-
-    // useEffect(() => {
-    //     content = Conditional_rendering_from_route(data);
-    // }, [loading, data])
-
-    console.log(loading)
 
     if(loading) {
         content = <ActivityIndicator /> 
     } else {
         if (type == 'shows') {
             return (
-                <ShowsView data={data} />
+                <PodcastShows data={data} />
             )
         } else if (type == 'episodes') {
-            return <EpisodesView data={data} />
+            return <PodcastEpisodes data={data} />
         } else {
             alert("ceci n'existe pas");
         }

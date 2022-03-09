@@ -4,10 +4,9 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
-import React, { useEffect, useState } from "react"
 import { FlatList } from 'react-native-web';
 
-export const ShowsView = (props) => {
+export const PodcastEpisodes = (props) => {
 
     const styles = StyleSheet.create({
         container: {
@@ -41,16 +40,14 @@ export const ShowsView = (props) => {
     );
 
     const renderItem = ({ item }) => (
-        <Item 
-        type={item.type} 
-        id={item.id} 
-        image={item.attributes.image_url}
-        title={item.attributes.title}
-        description={item.attributes.description}    
+        <Item
+            type={item.type}
+            id={item.id}
+            image={item.attributes.image_url}
+            title={item.attributes.title}
+            description={item.attributes.description}
         />
     );
-
-    console.log("ici composant")
 
     return (
         <FlatList
