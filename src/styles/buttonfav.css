@@ -1,0 +1,23 @@
+.buttonfav{
+    width: 110px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #61CB8A;
+    background-color: white;
+    border-color: #61CB8A;
+    border-width: 1px;
+    border-radius: 4px;
+    justify-content: flex-start;
+}
+
+.buttonfav .favorite-active {
+    width: 110px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    background-color: #61CB8A;
+    border-color: #61CB8A;
+    border-width: 1px;
+    border-radius: 4px;
+    justify-content: flex-start;
+}
