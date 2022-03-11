@@ -1,16 +1,15 @@
 // import styles from '../../styles/buttonfav.css';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Pressable, View, Text } from 'react-native-web';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { StyleSheet, Pressable, View, Text } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Check if a User is logged in
 function FavoriteButton() {
   // Declare a favBool that will eventually have a value of true or false
   const [favBool, setBool] = useState(false); // hooks d'état
   // verifier si le user est co 
-  const user_id="5";
-  const program_id="2";
+  const user_id="1";
+  const program_id="1";
 
   // fetch whether a user/program relationship exists
   // request postman
@@ -24,7 +23,7 @@ function FavoriteButton() {
   
   const fetcher = async () => { 
     try {
-      const got = await fetch(`https://localhost:8000/users?id=${user_id}&programs.id=${program_id}`, requestOptions);
+      const got = await fetch(`https://intense-springs-77079.herokuapp.com/users?id=${user_id}&programs.id=${program_id}`, requestOptions);
       const response = await got.json(); 
       console.log(response);
 
@@ -54,8 +53,8 @@ function FavoriteButton() {
 // ----------------------------------------------------------------------------------------------------------------------------
 
   // Define the font awesome icons as variables (currentlyAFavorite or notCurrentlyAFavorite)
-    const currentlyAFavorite = <FontAwesomeIcon icon={faCheck}/>
-    const notCurrentlyAFavorite = <FontAwesomeIcon icon={faHeart}/>
+    const currentlyAFavorite = <MaterialCommunityIcons name="heart" size={24} color="#C71585"/>
+    const notCurrentlyAFavorite = <MaterialCommunityIcons name="heart" size={24} color="grey" />
 
     // Declare a toggleFavorite variable that takes in program_id
     const toggleFavorite = () => {
@@ -75,7 +74,7 @@ function FavoriteButton() {
               redirect: 'follow'
             };
 
-            fetch(`https://localhost:8000/api/users/${user_id}/remove/programs/${program_id}`, requestOptions)
+            fetch(`https://intense-springs-77079.herokuapp.com/api/users/${user_id}/remove/programs/${program_id}`, requestOptions)
               .then(response => response.text())
               .then(result => console.log(result))
               .catch(error => console.log('error', error));
@@ -90,23 +89,30 @@ function FavoriteButton() {
             setBool(true);
             console.log(favBool);
             // méthode pour add realtion
-            // gérer les error
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var requestOptions = {
+              method: 'GET',
+              headers: myHeaders,
+              redirect: 'follow'
+            };
+
+            fetch(`https://intense-springs-77079.herokuapp.com/api/users/${user_id}/add/programs/${program_id}`, requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
+
+            // gerer les error
           }
     };
     
-     const [justifyContent, setJustifyContent] = useState(0);
-    const justifyContents = 'space-around';
-
-    const hookedStyles = {
-    justifyContent: justifyContents[justifyContent],
-  };
     // return the favorite button that uses your CSS styling,
     // onClick handles toggleFavorite which will using the ternary of favorite === true
     return (
-      <View>
+      <View style={styles.view}>
         <Pressable
-          style={favBool ? styles.favActive : styles.favInactive}
-          onPress={() => toggleFavorite()}
+          style={styles.fav}
+          onPress={toggleFavorite}
           key={program_id}
           >
           <Text>{ favBool ? currentlyAFavorite : notCurrentlyAFavorite }</Text> 
@@ -117,10 +123,15 @@ function FavoriteButton() {
 }
 
 const styles = StyleSheet.create({
+  view : {    
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
   text : {
     marginLeft: 15,
   },
-  favActive : {
+  fav : {
       backgroundColor: 'white',
       fontSize: 18,
       fontWeight: '400', 
@@ -136,22 +147,5 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       textTransform: 'uppercase',
   },
-  favInactive : {
-    fontSize: 18,
-    fontWeight: '400', 
-    color : 'white',
-    backgroundColor: '#61CB8A',
-    borderColor: '#61CB8A',
-    borderWidth: 1,
-    borderRadius: 4,
-    justifyContent: 'flex-start',
-    width: 100,
-    height: 32,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    textTransform: 'uppercase',
-
-  }
 })
 export {FavoriteButton};
