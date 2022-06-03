@@ -1,3 +1,21 @@
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Navigations from './src/navigations/Navigations';
+
+function App() {
+  return (
+
+    <NavigationContainer>
+      <Navigations />
+    </NavigationContainer>
+  );
+}
+
+
+
+export default App;
+
+/*
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Category from './src/category';
@@ -69,3 +87,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+*/
+
