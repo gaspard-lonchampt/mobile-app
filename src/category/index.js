@@ -15,7 +15,8 @@ const Category = ({ navigation }) => {
   const fetchCategory = async () => {
     setLoader(true)
      try {
-      const response = await fetch('http://localhost:8080/categories/');
+      // const response = await fetch('http://localhost:8080/categories/');
+      const response = await fetch('https://intense-springs-77079.herokuapp.com/categories');
       const json = await response.json();
       setCategory(json['hydra:member'])
       console.log(json['hydra:member'])
@@ -47,7 +48,7 @@ const Category = ({ navigation }) => {
                  key={category.id}
                  title={category.id} 
                  name={category.name}> 
-         <Text style={styles.text}>{`${category.name}`}</Text>
+        <Text style={styles.text}>{`${category.name}`}</Text>
       </Pressable >)
 
   }
@@ -58,9 +59,11 @@ const Category = ({ navigation }) => {
 
 
   return (
-    <View >
-      {loader ? <ActivityIndicator/> :   <> {categoryInArray(category)} </>}
-    </View>
+    <Text >
+
+        {loader ? <ActivityIndicator/> :   <> {categoryInArray(category)} </>}
+  
+    </Text>
   )
 
 

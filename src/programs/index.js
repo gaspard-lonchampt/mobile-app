@@ -13,7 +13,8 @@ const Programs = ({route}) => {
   const fetchPrograms = async () => {
     setLoader(true)
      try {
-      const response = await fetch(`http://localhost:8080/programs?categories=${articleId}`);
+      // const response = await fetch(`http://localhost:8080/programs?categories=${articleId}`);
+      const response = await fetch(`https://intense-springs-77079.herokuapp.com/programs?categories=${articleId}`);
       const json = await response.json();
   
       setPrograms(json['hydra:member'])
@@ -79,9 +80,9 @@ const Programs = ({route}) => {
 
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
+    <Text >
     {loader ? <ActivityIndicator/> :   <> {programsInArray(programs)}</>}
-    </View>
+    </Text>
   )
 
 
