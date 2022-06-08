@@ -13,15 +13,11 @@ const Programs = ({route}) => {
   const fetchPrograms = async () => {
     setLoader(true)
      try {
-      // const response = await fetch(`http://localhost:8080/programs?categories=${articleId}`);
       const response = await fetch(`https://intense-springs-77079.herokuapp.com/programs?categories=${articleId}`);
       const json = await response.json();
-  
       setPrograms(json['hydra:member'])
       setLoader(false)
       console.log(json)
-    
-     
 
     } catch (error) {
       console.error(error);
@@ -29,13 +25,6 @@ const Programs = ({route}) => {
     } 
   }
 
-
-  // const loop = (data) =>{
-
-  //   let array = []
-  //   for (let i =0; i < data.length; i++){
-  //      array.push(data[i].name)
-  //   }
 
     const programsInArray = (data) =>{
       let arrayForMap = []
@@ -50,18 +39,9 @@ const Programs = ({route}) => {
       }
       console.log(arrayForMap)
   
-    //   return arrayForMap.map(category => 
-    //     <Pressable onPress={()=> navigation.navigate('Programs', {idCat:category.id})}
-    //                style={styles.button}    
-    //                key={category.id}
-    //                title={category.id} 
-    //                name={category.name}> 
-    //        <Text style={styles.text}>{`${category.name}`}</Text>
-    //     </Pressable >)
-  
-    // }
 
-    return arrayForMap.map(program =>  <Pressable onPress={()=> navigation.navigate('Programs', {programId:program.id})}
+    return arrayForMap.map(program => 
+      <Pressable onPress={()=> navigation.navigate('Programs', {programId:program.id})}
           style={styles.button}    
           key={program.id}
           title={program.id} 
@@ -74,15 +54,10 @@ const Programs = ({route}) => {
     fetchPrograms()
   },[])
 
-
-
-
-
-
   return (
-    <Text >
-    {loader ? <ActivityIndicator/> :   <> {programsInArray(programs)}</>}
-    </Text>
+    <View >
+      {loader ? <ActivityIndicator/> :   <>{programsInArray(programs)}</>}
+    </View>
   )
 
 
